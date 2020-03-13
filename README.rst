@@ -61,13 +61,13 @@ Then load the configuration with
 
 .. code-block:: bash
 
-    rsvpmeetup --config $(pwd)
+    rsvpcron --config $(pwd)
 
 or 
 
 .. code-block:: bash
 
-    rsvpmeetup --config path
+    rsvpcron --config path
     
 
 Running
@@ -78,7 +78,7 @@ Simply run the following command from bash
 
 .. code-block:: bash 
 
-    rsvpmeetup --run 
+    rsvpcron --run 
 
 
 
