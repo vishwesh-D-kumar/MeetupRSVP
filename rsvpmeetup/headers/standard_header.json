@@ -1,0 +1,12 @@
+{
+  "authority": "www.meetup.com",
+  "sec-fetch-dest": "empty",
+  "x-meetup-activity": "standardized_url=%2Furlname%2Fevents%2Fcalendar%2Fdate&standardized_referer=%2Furlname%2Fevents",
+  "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
+  "content-type": "application/json",
+  "accept": "*/*",
+  "sec-fetch-site": "same-origin",
+  "sec-fetch-mode": "cors",
+  "referer": "https://www.meetup.com/eclecticbookclubforwomen/events/calendar/",
+  "accept-language": "en-GB,en-US;q=0.9,en;q=0.8"
+}

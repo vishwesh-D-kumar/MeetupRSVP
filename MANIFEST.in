@@ -1,0 +1,4 @@
+include README.rst
+
+include rsvpmeetup/path.txt
+include rsvpmeetup/headers/*.json
