@@ -3,6 +3,28 @@ Helper Functions
 """
 import json
 import pkg_resources
+import yagmail
+
+
+def mail(message: str):
+
+    """
+    :param message: Message to mail
+    """
+    user = get_config_data('secret.json')
+
+    sender_email = user['mail_id']
+    password = user['mail_password']
+
+    receiver = user['email']
+    body = 'Hey! Here are the actions taken by the cron run by you !\n' + message
+
+    yag = yagmail.SMTP(sender_email, password)
+    yag.send(
+        to=receiver,
+        subject="RSVP Meetup report",
+        contents=body,
+    )
 
 def get_config_path():
   DATA_PATH = pkg_resources.resource_filename('rsvpmeetup', 'path.txt')

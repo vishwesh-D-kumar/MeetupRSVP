@@ -4,7 +4,7 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 setup(name='rsvpmeetup',
-      version='0.2',
+      version='0.4',
       long_description=readme(),
       description='A Module to Automatically rsvp yes to events in configured events for meetup.com',
       url='https://github.com/vishwesh-D-kumar/MeetupRSVP',
@@ -14,7 +14,9 @@ setup(name='rsvpmeetup',
       packages=['rsvpmeetup'],
       install_requires=[
           'requests',
+            'yagmail',
       ],
+      python_requires=">=3.3",
       scripts=['rsvpcron'],
       include_package_data=True,
       zip_safe=False)

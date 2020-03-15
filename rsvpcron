@@ -1,43 +1,49 @@
 #!/usr/bin/env python
 import argparse
-import rsvpmeetup
 import pkg_resources
-
+import rsvpmeetup
 
 my_parser = argparse.ArgumentParser(prog='rsvpcron',
-	description='Main File to the meetuprsvp script',
-	usage='%(prog)s [options] [path]')
+                                    description='Main File to the meetuprsvp script',
+                                    usage='%(prog)s [options] [path]')
 
-my_parser.add_argument('--config',action='store',help='Enter Paths to secret config files')
-# my_parser.add_argument('--groups',action='store',help='Enter Paths to group config files')
-my_parser.add_argument('--run',action='store_true',help='Begin the script')
+my_parser.add_argument('--config', action='store',
+                       help='Enter Paths to secret config files')
+my_parser.add_argument('--run', action='store_true',
+                       help='Begin the script')
+my_parser.add_argument('--dry-run', action='store_true',
+                       help='Dry-run of the script . Details actions that would be taken by script ')
+my_parser.add_argument('--mail', action='store_true',
+                       help='Whether or not to report RSVPS via mail ')
 
-def cron():
-	from rsvpmeetup.api import Session
-	with Session() as new_session:
-		new_session=Session()
-		new_session.login()
-		new_session.rsvp_groups()
+
+def cron(dryrun, mail):
+    with rsvpmeetup.api.Session(dryrun=dryrun, mail=mail) as new_session:
+        try:
+            new_session.login()
+        except Exception as e:
+            print(e.message)
+            if mail:
+                rsvpmeetup.helper.mail(e.message)
+            raise e
+        new_session.rsvp_groups()
+
 
 def initialize(path):
-	if path!=None:
-		DATA_PATH = pkg_resources.resource_filename('rsvpmeetup', 'path.txt')
-		with open(DATA_PATH,'w+') as f:
-			f.write(path)
-		print("Done configuring path")
+    if path is not None:
+        DATA_PATH = pkg_resources.resource_filename('rsvpmeetup', 'path.txt')
+        with open(DATA_PATH, 'w+') as f:
+            f.write(path)
+        print("Done configuring path")
 
 
-
-args=my_parser.parse_args()
-if not vars(args)['run'] and args.config==None:
-	my_parser.print_help()
+args = my_parser.parse_args()
+if not vars(args)['run'] and args.config is None and not vars(args)['dry_run']:
+    my_parser.print_help()
 
 initialize(args.config)
-
-if vars(args)['run']:
-	cron()
+# print(vars(args))
+if vars(args)['run'] or vars(args)['dry_run']:
+    cron(vars(args)['dry_run'], vars(args)['mail'])
 
 # if cron
-
-
-
