@@ -16,6 +16,13 @@ Assuming you have python already, install the package using ``pip``:
 .. code-block:: bash
 
     $ pip install rsvpmeetup
+    
+For the dev version , clone this repo and at the root directory :
+
+.. code-block:: bash
+
+    $ pip install .
+
 
 
 Required
